@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [German Burdin](https://up.htmlacademy.ru/ecmascript/20/user/2323243).
-* Наставник: `Неизвестно`.
+* Наставник: `Alexander Gorbunov`.
 
 ---
 
