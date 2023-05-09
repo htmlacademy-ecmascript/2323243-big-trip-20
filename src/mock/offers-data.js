@@ -46,4 +46,4 @@ const getOffersId = (type) => {
 const getOffersList = () => offers;
 
 
-export { offers, getOffersId , getOffersList};
+export { offers, getOffersId , getOffersList };
