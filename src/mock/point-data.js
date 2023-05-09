@@ -32,7 +32,7 @@ const getTripPoints = () => {
   return tripPoints;
 };
 
-const getNewTripPoint = () => getNewTripPoint();
+const getNewTripPoint = () => getTripPoint();
 
 
 export { getTripPoints, getNewTripPoint };
