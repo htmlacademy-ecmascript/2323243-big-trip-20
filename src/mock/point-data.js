@@ -4,7 +4,7 @@ import { offers, getOffersId } from './offers-data.js';
 import { destinationList, getDestinationId } from './destination-data.js';
 
 
-const getTripPoint = () => {
+const getNewTripPoint = () => {
   const randomPeriod = getRandomPeriod();
   const typePoint = util.getRandomArrayElement(offers).type;
   const city = util.getRandomArrayElement(destinationList).name;
@@ -27,12 +27,10 @@ const getTripPoint = () => {
 const getTripPoints = () => {
   const tripPoints = [];
   for (let i = 0; i < util.getRandomCount(CONST_DATA.countLimit); i++) {
-    tripPoints.push(getTripPoint());
+    tripPoints.push(getNewTripPoint());
   }
   return tripPoints;
 };
-
-const getNewTripPoint = () => getTripPoint();
 
 
 export { getTripPoints, getNewTripPoint };
