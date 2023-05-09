@@ -1,23 +1,14 @@
-import EventListPresenter from './presenter/event-list-presenter.js';
-import EventInfoPresenter from './presenter/event-info-presenter.js';
-import FilterPresenter from './presenter/filter-presenter.js';
+import MainPresenter from './presenter/main-presenter.js';
+import TripPointsModel from './model/trip-points-model.js';
+import DestinationsModel from './model/destinations-model.js';
+import OffersModel from './model/offers-model.js';
 
-const eventListElement = document.querySelector('.trip-events');
-const eventInfoElement = document.querySelector('.trip-main');
-const filterElement = document.querySelector('.trip-controls__filters');
-
-const eventInfoPresenter = new EventInfoPresenter(
-  {container: eventInfoElement}
-);
-
-const filterPresenter = new FilterPresenter(
-  {container: filterElement}
-);
-
-const eventListPresenter = new EventListPresenter(
-  {container: eventListElement}
-);
-
-eventInfoPresenter.init();
-filterPresenter.init();
-eventListPresenter.init();
+const tripPointsModel = new TripPointsModel;
+const destinationsModel = new DestinationsModel;
+const offersModel = new OffersModel;
+const mainPresenter = new MainPresenter({
+  tripPointsModel,
+  destinationsModel,
+  offersModel
+});
+mainPresenter.init();
