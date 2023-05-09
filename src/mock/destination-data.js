@@ -41,4 +41,4 @@ const getDestinationId = (city) => {
 
 const getDestinationList = () => destinationList;
 
-export { destinationList, getDestinationId , getDestinationList};
+export { destinationList, getDestinationId , getDestinationList };
