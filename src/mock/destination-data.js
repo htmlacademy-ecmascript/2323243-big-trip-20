@@ -3,7 +3,8 @@ import { CONST_DATA } from './const-data.js';
 
 const getPictures = (city) => {
   const pictures = [];
-  for (let i = 0; i < util.getRandomCount(CONST_DATA.countLimit); i++) {
+  const randomCount = util.getRandomCount(CONST_DATA.countLimit);
+  for (let i = 0; i < randomCount; i++) {
     pictures[i] = {
       src: `${CONST_DATA.pictureURL}${util.getRandomPrice()}`,
       description: `${city}, ${util.getRandomArrayElement(CONST_DATA.descriptionPlaces)}`
