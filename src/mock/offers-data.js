@@ -1,5 +1,6 @@
 import { util } from '../util.js';
 import { CONST_DATA } from './const-data.js';
+import RoutePoint from '../model/routePoint.js';
 
 const getOffer = (offerTitle) => {
   const newOffer = {
@@ -7,7 +8,20 @@ const getOffer = (offerTitle) => {
     title: offerTitle,
     price: util.getRandomPrice()
   };
-  return newOffer;
+  return new RoutePoint(
+    newOffer.id,
+    newOffer.price,
+    null,
+    null,
+    {
+      name: newOffer.title,
+      description: '',
+      pictures: []
+    },
+    false,
+    null,
+    null
+  );
 };
 
 const getOffers = () => {
@@ -28,7 +42,23 @@ const getAllOffers = () => {
     };
   }
 
-  return allOffers;
+  return allOffers.map((offer) => {
+    const { type, offers: subOffers } = offer;
+    return new RoutePoint(
+      util.getUniqId(),
+      null,
+      null,
+      null,
+      {
+        name: '',
+        description: '',
+        pictures: []
+      },
+      false,
+      subOffers,
+      type
+    );
+  });
 };
 
 
@@ -45,5 +75,4 @@ const getOffersId = (type) => {
 
 const getOffersList = () => offers;
 
-
-export { offers, getOffersId , getOffersList };
+export { getOffersId , getOffersList };

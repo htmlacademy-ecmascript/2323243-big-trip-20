@@ -1,12 +1,12 @@
 import { getRandomPeriod, util } from '../util.js';
 import { CONST_DATA } from './const-data.js';
-import { offers, getOffersId } from './offers-data.js';
+import { getOffersList, getOffersId } from './offers-data.js';
 import { destinationList, getDestinationId } from './destination-data.js';
 import RoutePoint from '../model/routePoint.js';
 
 const getNewTripPoint = () => {
   const randomPeriod = getRandomPeriod();
-  const typePoint = util.getRandomArrayElement(offers).type;
+  const typePoint = util.getRandomArrayElement(getOffersList()).type;
   const city = util.getRandomArrayElement(destinationList).name;
   const tripPoint = {
     id: util.getUniqId(),
