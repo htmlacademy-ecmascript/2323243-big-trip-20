@@ -2,7 +2,9 @@ import SortView from '../view/sort-view.js';
 import EventListView from '../view/event-list-view.js';
 import EventItemView from '../view/event-item-view.js';
 import EventEditView from '../view/event-edit-view.js';
+import {generatePoint} from "../mock/generateMockData.js"
 import {render} from '../render.js';
+import { PointmModel } from '../models/point-model.js';
 
 const ITEMS_QUANTITY = 3;
 
@@ -19,7 +21,7 @@ export default class EventListPresenter {
     render(new EventEditView(), this.eventListView.getElement());
 
     for (let i = 0; i < ITEMS_QUANTITY; i++) {
-      render(new EventItemView(), this.eventListView.getElement());
+      render(new EventItemView(PointmModel.fromJSON(generatePoint())), this.eventListView.getElement());
     }
   }
 }
