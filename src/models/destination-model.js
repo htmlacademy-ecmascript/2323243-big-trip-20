@@ -15,6 +15,6 @@ export class DestinationModel {
   }
 
   static fromJSON(json) {
-    return new DestinationModel(JSON.parse(json))
+    return new DestinationModel(JSON.parse(json));
   }
 }

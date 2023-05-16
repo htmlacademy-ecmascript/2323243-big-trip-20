@@ -42,7 +42,7 @@ const createItemTemlpate = (point) =>
 export default class EventItemView {
 
   constructor(point) {
-    this.point = point
+    this.point = point;
   }
 
   getTemplate() {
