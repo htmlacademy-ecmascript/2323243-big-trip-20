@@ -1,23 +1,23 @@
 import {createElement} from '../render.js';
 
-const createItemTemlpate = () =>
+const createItemTemlpate = (point) =>
   `<li class="trip-events__item">
     <div class="event">
-      <time class="event__date" datetime="2019-03-18">MAR 18</time>
+      <time class="event__date" datetime="${point.dateFrom}">${point.day}</time>
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/drive.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">Drive Chamonix</h3>
+      <h3 class="event__title">${point.pointTitle}</h3>
       <div class="event__schedule">
         <p class="event__time">
-          <time class="event__start-time" datetime="2019-03-18T14:30">14:30</time>
+          <time class="event__start-time" datetime="${point.dateFrom}">${point.timeFrom}</time>
           &mdash;
-          <time class="event__end-time" datetime="2019-03-18T16:05">16:05</time>
+          <time class="event__end-time" datetime="${point.dateTo}">${point.timeTo}</time>
         </p>
-        <p class="event__duration">01H 35M</p>
+        <p class="event__duration">${point.pointDuration}</p>
       </div>
       <p class="event__price">
-        &euro;&nbsp;<span class="event__price-value">160</span>
+        &euro;&nbsp;<span class="event__price-value">${point.basePrice}</span>
       </p>
       <h4 class="visually-hidden">Offers:</h4>
       <ul class="event__selected-offers">
@@ -40,8 +40,13 @@ const createItemTemlpate = () =>
   </li>`;
 
 export default class EventItemView {
+
+  constructor(point) {
+    this.point = point;
+  }
+
   getTemplate() {
-    return createItemTemlpate();
+    return createItemTemlpate(this.point);
   }
 
   getElement() {
