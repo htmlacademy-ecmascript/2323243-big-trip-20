@@ -1,4 +1,5 @@
-export class TripModel {   
+import {OfferModel} from './offers-models.js';
+export class TripModel {
   constructor(data) {
     this.type = data.type;
     this.offers = [];
