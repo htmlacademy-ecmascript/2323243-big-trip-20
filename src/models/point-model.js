@@ -1,11 +1,11 @@
-import {generateDestination} from "../mock/generateMockData.js"
-import {DestinationModel} from "./destination-model.js"
+import {generateDestination} from '../mock/generateMockData.js';
+import {DestinationModel} from './destination-model.js';
 
 export class PointmModel {
   // В конструкторе указываем поля, которые будут в точке маршрута
   // Обрати внимание, что при редактировании формы содания, у тебя поля id будет null
   constructor(data) {
-    this.id = data.id
+    this.id = data.id;
     this.basePrice = data.base_price;
     this.dateFrom = new Date(data.date_from);
     this.dateTo = new Date(data.date_to);
@@ -24,7 +24,7 @@ export class PointmModel {
 
   get pointTitle() {
     const dest = DestinationModel.fromJSON(generateDestination());
-    return `${this.type} ${dest.name}`
+    return `${this.type} ${dest.name}`;
   }
 
   get timeFrom() {
@@ -48,6 +48,6 @@ export class PointmModel {
 
   // Это нужно, чтобы распарсить ответ, в нашем случае - моковый json
   static fromJSON(json) {
-    return new PointmModel(JSON.parse(json))
+    return new PointmModel(JSON.parse(json));
   }
 }
