@@ -1,7 +1,7 @@
 import {generateDestination} from '../mock/generateMockData.js';
 import {DestinationModel} from './destination-model.js';
 
-export class PointmModel {
+export default class PointModel {
   // В конструкторе указываем поля, которые будут в точке маршрута
   // Обрати внимание, что при редактировании формы содания, у тебя поля id будет null
   constructor(data) {
@@ -48,6 +48,6 @@ export class PointmModel {
 
   // Это нужно, чтобы распарсить ответ, в нашем случае - моковый json
   static fromJSON(json) {
-    return new PointmModel(JSON.parse(json));
+    return new PointModel(JSON.parse(json));
   }
 }

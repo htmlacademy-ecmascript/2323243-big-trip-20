@@ -1,6 +1,7 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
-const createItemTemlpate = (point) =>
+const createItemTemplate = (point) =>
+
   `<li class="trip-events__item">
     <div class="event">
       <time class="event__date" datetime="${point.dateFrom}">${point.day}</time>
@@ -39,24 +40,16 @@ const createItemTemlpate = (point) =>
     </div>
   </li>`;
 
-export default class EventItemView {
+export default class EventItemView extends AbstractView {
+  #point = null;
 
-  constructor(point) {
-    this.point = point;
+  constructor({ point }) {
+    super();
+    this.#point = point;
   }
 
-  getTemplate() {
-    return createItemTemlpate(this.point);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createItemTemplate(this.#point);
   }
 }
+

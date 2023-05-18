@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const createEventEditTemlpate = () =>
   ` <li class="trip-events__item">
@@ -157,19 +157,18 @@ const createEventEditTemlpate = () =>
   </form>
 </li>`;
 
-export default class EventEditView {
-  getTemplate() {
+export default class EventEditView extends AbstractView {
+  constructor() {
+    super();
+  }
+
+  get template() {
     return createEventEditTemlpate();
   }
 
   getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+    const element = document.createElement('div');
+    element.innerHTML = this.template;
+    return element.firstChild;
   }
 }

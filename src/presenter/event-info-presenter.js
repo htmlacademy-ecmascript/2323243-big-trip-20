@@ -1,5 +1,5 @@
 import EventInfoView from '../view/event-info-view.js';
-import {RenderPosition, render} from '../render.js';
+import {RenderPosition, render} from '../framework/render.js';
 
 export default class EventInfoPresenter {
 
