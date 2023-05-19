@@ -43,7 +43,7 @@ const createItemTemplate = (point) =>
 export default class EventItemView extends AbstractView {
   #point = null;
 
-  constructor({ point }) {
+  constructor(point) {
     super();
     this.#point = point;
   }
