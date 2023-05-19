@@ -51,5 +51,11 @@ export default class EventItemView extends AbstractView {
   get template() {
     return createItemTemplate(this.#point);
   }
+
+  getElement() {
+    const element = document.createElement('div');
+    element.innerHTML = this.template;
+    return element.firstChild;
+  }
 }
 
