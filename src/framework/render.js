@@ -26,7 +26,7 @@ function createElement(template) {
  * @param {HTMLElement} container Элемент в котором будет отрисован компонент
  * @param {string} place Позиция компонента относительно контейнера. По умолчанию - `beforeend`
  */
-function render(component, container, place = RenderPosition.BEFOREEND, withLog=false) {
+function render(component, container, place = RenderPosition.BEFOREEND) {
   if (!(component instanceof AbstractView)) {
     throw new Error('Can render only components');
   }
@@ -34,7 +34,6 @@ function render(component, container, place = RenderPosition.BEFOREEND, withLog=
   if (container === null) {
     throw new Error('Container element doesn\'t exist');
   }
-  if (withLog) {console.log(`Adding ${component.template} to:`, container);}
   container.insertAdjacentElement(place, component.element);
 }
 
