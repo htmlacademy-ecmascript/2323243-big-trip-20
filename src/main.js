@@ -1,23 +1,27 @@
-import EventListPresenter from './presenter/event-list-presenter.js';
-import EventInfoPresenter from './presenter/event-info-presenter.js';
-import FilterPresenter from './presenter/filter-presenter.js';
+import TripInfoView from './view/trip-info-view.js';
+import FilterView from './view/fillters-view.js';
+import SortView from './view/sort-view.js';
+import BoardPresenter from './presenter/board-presenter.js';
+import PointsModel from './model/points-model.js';
+import MockService from './service/mock-service.js';
+import DestinationsModel from './model/destination-model.js';
+import OffersModel from './model/offers-model.js';
+import {render, RenderPosition} from './framework/render.js';
 
-const eventListElement = document.querySelector('.trip-events');
-const eventInfoElement = document.querySelector('.trip-main');
-const filterElement = document.querySelector('.trip-controls__filters');
+const tripMainElement = document.querySelector('.trip-main');
+const tripFilltersElement = document.querySelector('.trip-controls__filters');
+const mainContentElement = document.querySelector('.trip-events');
 
-const eventInfoPresenter = new EventInfoPresenter(
-  {container: eventInfoElement}
-);
+const mockService = new MockService();
+const destinationsModel = new DestinationsModel(mockService);
+const pointsModel = new PointsModel(mockService);
+const offersModel = new OffersModel(mockService);
 
-const filterPresenter = new FilterPresenter(
-  {container: filterElement}
-);
 
-const eventListPresenter = new EventListPresenter(
-  {container: eventListElement}
-);
+const boardPresenter = new BoardPresenter({boardContainer: mainContentElement, destinationsModel, offersModel, pointsModel});
 
-eventInfoPresenter.init();
-filterPresenter.init();
-eventListPresenter.init();
+render(new TripInfoView(), tripMainElement, RenderPosition.AFTERBEGIN);
+render(new FilterView(), tripFilltersElement, RenderPosition.AFTERBEGIN);
+render(new SortView(), mainContentElement, RenderPosition.BEFOREEND);
+
+boardPresenter.init();
