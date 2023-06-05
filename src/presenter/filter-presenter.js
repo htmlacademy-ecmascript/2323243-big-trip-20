@@ -4,15 +4,12 @@ import FilterView from '../view/fillters-view.js';
 
 export default class FilterPresenter {
 
-  #pointsModel = null;
   #filterContainer = null;
   #filters = [];
 
   constructor({ filterContainer, pointsModel }) {
     this.#filterContainer = filterContainer;
-    this.#pointsModel = pointsModel;
-
-    this.#filters = generateFilters(this.#pointsModel.points);
+    this.#filters = generateFilters(pointsModel.points);
   }
 
   init() {
