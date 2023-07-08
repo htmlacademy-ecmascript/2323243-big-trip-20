@@ -44,9 +44,9 @@ export default class BoardPresenter {
       onModeChange: this.#handleModeChange
     });
 
-    pointPresenter.init(point);
+    pointPresenter.init(point); // в этом моменте вызывается вся функция init(point) в point-presenter
 
-    this.#pointPresenters.set(point.id, pointPresenter);
+    this.#pointPresenters.set(point.id, pointPresenter); // можно получить доступ к pointPresenter по его ключу (point.id) позже в коде при необходимости
   }
 
   #handleModeChange = () => {
