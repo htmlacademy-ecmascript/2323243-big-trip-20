@@ -46,7 +46,7 @@ const TYPES = [
   'restaurant'
 ];
 
-const DUFULT_TYPE = 'flight';
+const DEFAULT_TYPE = 'flight';
 
 const FilterType = {
   EVERYTHING: 'everything',
@@ -69,7 +69,7 @@ export {
   CITIES,
   Duration,
   TYPES,
-  DUFULT_TYPE,
+  DEFAULT_TYPE,
   FilterType,
   SortType
 };
