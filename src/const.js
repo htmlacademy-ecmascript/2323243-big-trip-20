@@ -9,17 +9,12 @@ const POINT_EMPTY = {
 };
 
 const DESCRIPTIONS = [
-  'Moscow - the capital of Russia with a rich history and impressive architecture.',
-  'Amsterdam - the city of canals, bicycles, and impressive museums.',
-  'Chamonix - a picturesque ski resort surrounded by majestic Alps.',
-  'Geneva - an international center of diplomacy with a beautiful lake and impressive fountains.',
-  'Buenos Aires - the capital of Argentina, known for its tango, historic architecture, and rich culture.',
-  'Paris - the city of love, famous for its iconic Eiffel Tower and beautiful boulevards.',
-  'Dublin - the historical and cultural center of Ireland, where you can enjoy music and beer in cozy pubs.',
-  'Wellington - the capital of New Zealand, nestled among scenic hills and washed by the ocean.',
-  'Barcelona - the city of Gaudi, sun, and magnificent beaches, where Mediterranean culture and history blend.',
-  'Los Angeles - the city of angels, the entertainment industry, and diversity, where you can encounter celebrities and enjoy beach relaxation.',
-  'Bordeaux - the capital of wine, where you can taste exquisite French wines and admire beautiful architecture.'
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  'Cras aliquet varius magna, non porta ligula feugiat eget.',
+  'Fusce tristique felis at fermentum pharetra.',
+  'Aliquam id orci ut lectus varius viverra.',
+  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
+  'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.'
 ];
 
 const CITIES = [
@@ -30,16 +25,13 @@ const CITIES = [
   'Buenos Aires',
   'Paris',
   'Dublin',
-  'Wellington',
-  'Barcelona',
-  'Los Angeles',
-  'Bordeaux'
+  'Wellington'
 ];
 
 const Duration = {
-  HOUR: 2,
-  DAY: 3,
-  MIN: 45
+  HOUR: 5,
+  DAY: 5,
+  MIN: 59
 };
 
 const TYPES = [
@@ -63,6 +55,13 @@ const FilterType = {
   PAST: 'past'
 };
 
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFER: 'offer'
+};
 
 export {
   POINT_EMPTY,
@@ -71,5 +70,6 @@ export {
   Duration,
   TYPES,
   DEFAULT_TYPE,
-  FilterType
+  FilterType,
+  SortType
 };
