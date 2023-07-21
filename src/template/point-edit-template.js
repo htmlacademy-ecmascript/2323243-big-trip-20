@@ -18,7 +18,7 @@ function createPointEditTemplate({ state, pointDestination, pointOffers }) {
           </label>
           <input class="event__input  event__input--destination"
           id="event-destination-1" type="text" name="event-destination"
-          value="${pointDestination.find((el) => el.id === destination).name}" list="destination-list-1">
+          value="${pointDestination.find((el) => el.id === destination)?.name || ''}" list="destination-list-1">
           <datalist id="destination-list-1">
             ${CITIES.map((city) => (`<option value="${city}"></option>`)).join(' ')}
           </datalist>

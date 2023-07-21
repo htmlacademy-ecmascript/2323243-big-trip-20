@@ -1,6 +1,7 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { createPointEditTemplate } from '../template/point-edit-template.js';
 import { POINT_EMPTY } from '../const.js';
+import dayjs from 'dayjs';
 
 export default class PointEditView extends AbstractStatefulView {
 
@@ -46,6 +47,14 @@ export default class PointEditView extends AbstractStatefulView {
 
     this.element.querySelector('.event__input--price')
       .addEventListener('change', this.#priceInputChange);
+
+     // Обработчик изменения времени начала
+    this.element.querySelector('#event-start-time-1')
+      .addEventListener('change', this.#startTimeInputChange);
+
+    // Обработчик изменения времени окончания
+    this.element.querySelector('#event-end-time-1')
+      .addEventListener('change', this.#endTimeInputChange);
   }
 
   get template() {
@@ -119,6 +128,45 @@ export default class PointEditView extends AbstractStatefulView {
       }
     });
   };
+
+  #startTimeInputChange = (evt) => {
+    evt.preventDefault();
+    const startTimeValue = evt.target.value;
+    console.log('Start time:', startTimeValue); // Отладочный вывод времени начала
+    const endTimeValue = this._state.point.dateTo; // Получите текущее значение времени окончания
+    console.log('End time:', endTimeValue); // Отладочный вывод времени окончания
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        dateFrom: dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate(),
+        // Добавьте проверку, чтобы предотвратить установку времени окончания раньше времени начала
+        dateTo: dayjs(endTimeValue, 'DD/MM/YY HH:mm').isBefore(startTimeValue)
+          ? dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate()
+          : dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate(),
+      },
+    });
+  };
+
+  #endTimeInputChange = (evt) => {
+    evt.preventDefault();
+    const endTimeValue = evt.target.value;
+    console.log('End time:', endTimeValue);
+    const startTimeValue = this._state.point.dateFrom;
+    console.log('Start time:', startTimeValue);
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        dateTo: dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate(),
+        dateFrom: dayjs(startTimeValue, 'DD/MM/YY HH:mm').isAfter(endTimeValue)
+          ? dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate()
+          : dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate(),
+      },
+    });
+  };
+
+
 
   static parsePointToState = ({ point }) => ({ point });
 

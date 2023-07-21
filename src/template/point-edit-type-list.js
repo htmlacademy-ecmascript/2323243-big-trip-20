@@ -1,4 +1,4 @@
-function createTyItem(types) {
+function createTypeItem(types) {
   return types.map((type, index) => /* html */ `
     <div class="event__type-item">
       <input id="event-type-${type}-${index}"
@@ -24,7 +24,7 @@ function createTypeList({ type }, types) {
       <div class="event__type-list">
         <fieldset class="event__type-group">
           <legend class="visually-hidden">Event type</legend>
-          ${createTyItem(types)}
+          ${createTypeItem(types)}
         </fieldset>
       </div>
     </div>
