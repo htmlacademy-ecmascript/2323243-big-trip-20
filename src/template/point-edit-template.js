@@ -7,6 +7,10 @@ import { createTypeList } from './point-edit-type-list.js';
 function createPointEditTemplate({ state, pointDestination, pointOffers }) {
   const { point } = state;
   const { basePrice, dateFrom, dateTo, destination, type } = point;
+
+  const formattedDateFrom = dayjs(dateFrom).format('YYYY-MM-DDTHH:mm');
+  const formattedDateTo = dayjs(dateTo).format('YYYY-MM-DDTHH:mm');
+
   return (/* html */`
   <li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -26,12 +30,12 @@ function createPointEditTemplate({ state, pointDestination, pointOffers }) {
 
         <div class="event__field-group  event__field-group--time">
           <label class="visually-hidden" for="event-start-time-1">From</label>
-          <input class="event__input  event__input--time" id="event-start-time-1" type="text"
-          name="event-start-time" value="${dayjs(dateFrom).format('DD/MM/YY HH:mm')}">
+          <input class="event__input  event__input--time" id="event-start-time-1" type="datetime-local"
+          name="event-start-time" value="${formattedDateFrom}">
           &mdash;
           <label class="visually-hidden" for="event-end-time-1">To</label>
-          <input class="event__input  event__input--time" id="event-end-time-1" type="text"
-          name="event-end-time" value="${dayjs(dateTo).format('DD/MM/YY HH:mm')}">
+          <input class="event__input  event__input--time" id="event-end-time-1" type="datetime-local"
+          name="event-end-time" value="${formattedDateTo}">
         </div>
 
         <div class="event__field-group  event__field-group--price">

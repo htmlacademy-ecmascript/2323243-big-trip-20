@@ -132,9 +132,7 @@ export default class PointEditView extends AbstractStatefulView {
   #startTimeInputChange = (evt) => {
     evt.preventDefault();
     const startTimeValue = evt.target.value;
-    console.log('Start time:', startTimeValue); // Отладочный вывод времени начала
     const endTimeValue = this._state.point.dateTo; // Получите текущее значение времени окончания
-    console.log('End time:', endTimeValue); // Отладочный вывод времени окончания
 
     this._setState({
       point: {
@@ -151,9 +149,7 @@ export default class PointEditView extends AbstractStatefulView {
   #endTimeInputChange = (evt) => {
     evt.preventDefault();
     const endTimeValue = evt.target.value;
-    console.log('End time:', endTimeValue);
     const startTimeValue = this._state.point.dateFrom;
-    console.log('Start time:', startTimeValue);
 
     this._setState({
       point: {
