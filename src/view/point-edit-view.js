@@ -48,7 +48,7 @@ export default class PointEditView extends AbstractStatefulView {
     this.element.querySelector('.event__input--price')
       .addEventListener('change', this.#priceInputChange);
 
-     // Обработчик изменения времени начала
+    // Обработчик изменения времени начала
     this.element.querySelector('#event-start-time-1')
       .addEventListener('change', this.#startTimeInputChange);
 
@@ -161,7 +161,6 @@ export default class PointEditView extends AbstractStatefulView {
       },
     });
   };
-
 
 
   static parsePointToState = ({ point }) => ({ point });
