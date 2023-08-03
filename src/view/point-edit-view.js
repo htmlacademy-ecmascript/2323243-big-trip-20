@@ -1,47 +1,170 @@
-import AbstractView from '../framework/view/abstract-view.js';
+import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { createPointEditTemplate } from '../template/point-edit-template.js';
 import { POINT_EMPTY } from '../const.js';
+import dayjs from 'dayjs';
 
-export default class PointEditView extends AbstractView {
+export default class PointEditView extends AbstractStatefulView {
 
-  #point = null;
-  #pointDestination = null;
+  #pointDestinations = null;
   #pointOffers = null;
-  #handleFormSubmit = null;
-  #handleCloseForm = null;
+  #onSubmitClick = null;
+  #onResetClick = null;
 
   constructor({ point = POINT_EMPTY, pointDestinations, pointOffers, onFormSubmit, onResetClick }) {
     super();
-    this.#point = point;
-    this.#pointDestination = pointDestinations;
+
+    this.#pointDestinations = pointDestinations;
     this.#pointOffers = pointOffers;
 
-    this.#handleFormSubmit = onFormSubmit;
-    this.#handleCloseForm = onResetClick;
+    this._setState(PointEditView.parsePointToState({ point }));
 
+    this.#onSubmitClick = onFormSubmit;
+    this.#onResetClick = onResetClick;
+
+    this._restoreHandlers();
+  }
+
+  reset = (point) => this.updateElement({ point });
+
+  _restoreHandlers() {
     this.element.querySelector('form')
       .addEventListener('submit', this.#formSubmitHandler);
 
     this.element.querySelector('.event__rollup-btn')
-      .addEventListener('click', this.#closeHandlerForm);
+      .addEventListener('click', this.#resetButtonClickHandler);
+
+    this.element.querySelector('.event__type-group')
+      .addEventListener('change', this.#typeInputClick);
+
+    this.element.querySelector('.event__input--destination')
+      .addEventListener('change', this.#distinationInputChange);
+
+    const offerBlock = this.element.querySelector('.event__available-offers');
+
+    if (offerBlock) {
+      offerBlock.addEventListener('change', this.#offerClickHandler);
+    }
+
+    this.element.querySelector('.event__input--price')
+      .addEventListener('change', this.#priceInputChange);
+
+    // Обработчик изменения времени начала
+    this.element.querySelector('#event-start-time-1')
+      .addEventListener('change', this.#startTimeInputChange);
+
+    // Обработчик изменения времени окончания
+    this.element.querySelector('#event-end-time-1')
+      .addEventListener('change', this.#endTimeInputChange);
   }
 
   get template() {
     return createPointEditTemplate({
-      point: this.#point,
-      pointDestination: this.#pointDestination,
+      state: this._state,
+      pointDestination: this.#pointDestinations,
       pointOffers: this.#pointOffers
     });
   }
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit();
+    this.#onSubmitClick(PointEditView.parseStateToPoint(this._state));
   };
 
-  #closeHandlerForm = (evt) => {
+  #resetButtonClickHandler = (evt) => {
     evt.preventDefault();
-    this.#handleCloseForm();
+    this.#onResetClick();
   };
+
+  #typeInputClick = (evt) => {
+    evt.preventDefault();
+
+    this.updateElement({
+      point: {
+        ...this._state.point,
+        type: evt.target.value,
+        offers: []
+      }
+    });
+  };
+
+  #distinationInputChange = (evt) => {
+    evt.preventDefault();
+
+    const selectedDestination = this.#pointDestinations
+      .find((pointDestination) => pointDestination.name === evt.target.value);
+
+    const selectedDestinationId = (selectedDestination)
+      ? selectedDestination.id
+      : null;
+
+    this.updateElement({
+      point: {
+        ...this._state.point,
+        destination: selectedDestinationId
+      }
+    });
+  };
+
+  #offerClickHandler = (evt) => {
+    evt.preventDefault();
+
+    const checkedBoxes = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        offers: checkedBoxes.map((element) => element.dataset.offerId)
+      }
+    });
+  };
+
+  #priceInputChange = (evt) => {
+    evt.preventDefault();
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        basePrice: evt.target.value
+      }
+    });
+  };
+
+  #startTimeInputChange = (evt) => {
+    evt.preventDefault();
+    const startTimeValue = evt.target.value;
+    const endTimeValue = this._state.point.dateTo; // Получите текущее значение времени окончания
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        dateFrom: dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate(),
+        // Добавьте проверку, чтобы предотвратить установку времени окончания раньше времени начала
+        dateTo: dayjs(endTimeValue, 'DD/MM/YY HH:mm').isBefore(startTimeValue)
+          ? dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate()
+          : dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate(),
+      },
+    });
+  };
+
+  #endTimeInputChange = (evt) => {
+    evt.preventDefault();
+    const endTimeValue = evt.target.value;
+    const startTimeValue = this._state.point.dateFrom;
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        dateTo: dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate(),
+        dateFrom: dayjs(startTimeValue, 'DD/MM/YY HH:mm').isAfter(endTimeValue)
+          ? dayjs(endTimeValue, 'DD/MM/YY HH:mm').toDate()
+          : dayjs(startTimeValue, 'DD/MM/YY HH:mm').toDate(),
+      },
+    });
+  };
+
+
+  static parsePointToState = ({ point }) => ({ point });
+
+  static parseStateToPoint = (state) => state.point;
 
 }
