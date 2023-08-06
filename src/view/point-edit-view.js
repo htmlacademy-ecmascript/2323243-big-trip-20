@@ -31,7 +31,7 @@ export default class PointEditView extends AbstractView {
     flatpickr(this.element.querySelector('#event-start-time-1'), {
       dateFormat: 'd/m/y H:i',
       enableTime: true,
-      theme: 'airbnb',
+      theme: 'airbnb',//для красоты
     });
 
     flatpickr(this.element.querySelector('#event-end-time-1'), {
