@@ -1,6 +1,9 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { createPointEditTemplate } from '../template/point-edit-template.js';
 import { POINT_EMPTY } from '../const.js';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+import 'flatpickr/dist/themes/airbnb.css';
 
 export default class PointEditView extends AbstractView {
 
@@ -24,6 +27,18 @@ export default class PointEditView extends AbstractView {
 
     this.element.querySelector('.event__rollup-btn')
       .addEventListener('click', this.#closeHandlerForm);
+
+    flatpickr(this.element.querySelector('#event-start-time-1'), {
+      dateFormat: 'd/m/y H:i',
+      enableTime: true,
+      theme: 'airbnb',//для красоты
+    });
+
+    flatpickr(this.element.querySelector('#event-end-time-1'), {
+      dateFormat: 'd/m/y H:i',
+      enableTime: true,
+      theme: 'airbnb',
+    });
   }
 
   get template() {
