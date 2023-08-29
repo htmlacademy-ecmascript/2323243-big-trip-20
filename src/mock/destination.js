@@ -10,6 +10,10 @@ function generateDestinationPics() {
     description: getRandomArrayElement(DESCRIPTIONS)
   };
 }
+/* {
+  src: 'https://loremflickr.com/248/152?random=42.jpg',
+  description: 'Moscow - the capital of Russia with a rich history and impressive architecture.'
+} */
 
 function generateDestination() {
   return {
@@ -20,5 +24,22 @@ function generateDestination() {
   };
 
 }
+
+/* {
+  id: '5df902c7-72af-4e3c-ba3e-7a9c9e4351b9',
+  description: 'Moscow - the capital of Russia with a rich history and impressive architecture.',
+  name: 'Moscow',
+  pictures: [
+    {
+      src: 'https://loremflickr.com/248/152?random=42.jpg',
+      description: 'Moscow - the capital of Russia with a rich history and impressive architecture.'
+    },
+    {
+      src: 'https://loremflickr.com/248/152?random=87.jpg',
+      description: 'Moscow - the capital of Russia with a rich history and impressive architecture.'
+    },
+    // Дополнительные изображения...
+  ]
+} */
 
 export { generateDestination };
